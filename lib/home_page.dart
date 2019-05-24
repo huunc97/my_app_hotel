@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/proflie.dart';
 //import 'package:login/proflie.dart';
+import 'information_page.dart';
 import 'placeholder_page.dart';
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
@@ -13,7 +14,7 @@ class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
    PlaceholderWidget(),
-   PlaceholderWidget(),
+   InformationWidget(),
    ProfileWidget(),
   ];
  @override
