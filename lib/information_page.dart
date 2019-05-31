@@ -16,7 +16,7 @@ class InformationWidgetState extends State<InformationWidget> {
   List<dynamic> data;
   Future<String> getData() async {
     var response = await http.get(
-        Uri.encodeFull("http://192.168.1.6:8080/my_app/api.php"),
+        Uri.encodeFull("http://192.168.1.6:8080/API_Hotel/api.php"),
         headers: {"Accept": "application/json"});
     setState(() {
       data = json.decode(response.body);

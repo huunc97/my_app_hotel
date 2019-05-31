@@ -25,7 +25,7 @@ class LoginPage1State extends State<LoginPage1> {
     /**************** Get Login Connection && Data ************************/
     Future<String> getLogin(String user) async {
       response = await http.get(
-          Uri.encodeFull("http://192.168.1.6:8080/API_Hotel/api.php"),
+          Uri.encodeFull("http://192.168.1.6:8080/API_Hotel/api.php?"),
           headers: {"Accept": "application/json"});
 
       print(response.body);
@@ -62,7 +62,7 @@ class LoginPage1State extends State<LoginPage1> {
         if (data[i]['user'] == user && data[i]['pass'] == password) {
           // Navigator.of(context).pushNamed("/seconds");
           var route = new MaterialPageRoute(
-              builder: (BuildContext context) => new PlaceholderWidget()
+              builder: (BuildContext context) => new HomePage()
               //new SecondPage(idUser: data[0]['user_id'],firstname: data[0]['first_name'],lastname: data[0]['last_name'],username: data[0]['username'],),
               );
           Navigator.of(context).push(route);

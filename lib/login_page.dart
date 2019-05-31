@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:login/home_page.dart';
+import 'package:login/placeholder_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   var data;
 @override
   Widget build(BuildContext context) {
-    Future<String> getLogin(String user) async {
+    Future<String> getLogin() async {
       response = await http.get(
           Uri.encodeFull("http://192.168.1.6:8080/API_Hotel/api.php"),
           headers: {"Accept": "application/json"});
