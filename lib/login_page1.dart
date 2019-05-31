@@ -25,7 +25,7 @@ class LoginPage1State extends State<LoginPage1> {
     /**************** Get Login Connection && Data ************************/
     Future<String> getLogin(String user) async {
       response = await http.get(
-          Uri.encodeFull("http://192.168.1.6:8080/my_app/api.php"),
+          Uri.encodeFull("http://192.168.1.6:8080/API_Hotel/api.php"),
           headers: {"Accept": "application/json"});
 
       print(response.body);
@@ -58,20 +58,15 @@ class LoginPage1State extends State<LoginPage1> {
 
     /******************* Check Data ****************************/
     VerifData(String user, String password, var datadb) {
-      if (data[1]['user'] == user) {
-        if (data[1]['pass'] == password) {
+      for (int i = 0; i < 10; i++) {
+        if (data[i]['user'] == user && data[i]['pass'] == password) {
           // Navigator.of(context).pushNamed("/seconds");
-
           var route = new MaterialPageRoute(
               builder: (BuildContext context) => new PlaceholderWidget()
               //new SecondPage(idUser: data[0]['user_id'],firstname: data[0]['first_name'],lastname: data[0]['last_name'],username: data[0]['username'],),
               );
           Navigator.of(context).push(route);
-        } else {
-          onSignedInErrorPassword();
         }
-      } else {
-        onSignedInErroruser();
       }
     }
 
@@ -96,7 +91,7 @@ class LoginPage1State extends State<LoginPage1> {
       leading: const Icon(Icons.person),
       title: TextFormField(
         decoration: InputDecoration(
-            labelText: "your user",
+            labelText: "Your user",
             filled: true,
             hintText: "Write your user please",
             border: InputBorder.none),
@@ -111,19 +106,20 @@ class LoginPage1State extends State<LoginPage1> {
       leading: const Icon(Icons.remove_red_eye),
       title: TextField(
         decoration: InputDecoration(
-            icon: new IconButton(
-                icon: Icon(
-                  Icons.remove_red_eye,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isSecured = !_isSecured;
-                  });
-                }),
+            // icon: new IconButton(
+            // icon: Icon(
+            //   Icons.remove_red_eye,
+            // ),
+            // onPressed: () {
+            //   setState(() {
+            //     _isSecured = !_isSecured;
+            //   });
+            // }),
+            filled: true,
             labelText: "your Password",
             hintText: "Write your Password please",
             border: InputBorder.none),
-        obscureText: _isSecured,
+        //obscureText: _isSecured,
         controller: _passwordController,
       ),
     );
@@ -138,8 +134,8 @@ class LoginPage1State extends State<LoginPage1> {
         onPressed: () {
           // Perform some action
           //SnackBar(content: Text("TEST SNACK BAR"),backgroundColor: Colors.deepOrange,);
-           getLogin(_userController.text);
-           VerifData(_userController.text, _passwordController.text, data);
+          getLogin(_userController.text);
+          VerifData(_userController.text, _passwordController.text, data);
         },
       ),
     );
@@ -180,9 +176,7 @@ class LoginPage1State extends State<LoginPage1> {
                   children: <Widget>[
                     user,
                     password,
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    SizedBox(height: 20.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[cancelButton, loginButton],
